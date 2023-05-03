@@ -1,10 +1,21 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { keysMapping, students } from "../data/studentModel";
+import { keysMapping, students, universities, years } from "../data/studentModel";
 import Actions from "./Actions";
 
 function getStudents() {
   return students;
+}
+
+function mapValues(array, key) {
+  let result = null;
+  const filtered = array.filter((pair) => pair.id === key);
+  
+  if (filtered.length > 0) {
+    result = filtered[0].value;
+  }
+
+  return result
 }
 
 function StudentTable() {
@@ -14,7 +25,7 @@ function StudentTable() {
   function onStudentRemove(student) {
     const updatedData = students.map((obj => {
       if(obj.id === student.id) {
-        obj.status = 'deleted';
+        obj.deleted = true;
       }
       return obj;
     }));
@@ -50,15 +61,15 @@ function StudentTable() {
               <tr
                 key={index}
                 className={`${
-                  student.status === "deleted" ? "table-danger" : ""
+                  student.deleted === true ? "table-danger" : ""
                 }`}
               >
                 <th scope="row">{student.id}</th>
                 <td>{student.nume}</td>
                 <td>{student.prenume}</td>
                 <td>{student.nr_matricol}</td>
-                <td>{student.facultate}</td>
-                <td>{student.an_studiu}</td>
+                <td>{mapValues(universities, student.facultate)}</td>
+                <td>{mapValues(years, student.an_studiu)}</td>
                 <td>
                   <div>
                     <input

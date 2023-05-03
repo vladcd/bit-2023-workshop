@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 
 function Actions({ student, onRemove }) {
-  const [isDisabled, setIsDisabled] = useState(student.status === "deleted");
+  const [isDisabled, setIsDisabled] = useState(student.deleted === true);
 
   function removeFromDB(student) {
-    // const response = await fetch('/api/registration', {
+    // const response = await fetch('', {
     //   method: 'DELETE',
     //   body: JSON.stringify(values)
     // });

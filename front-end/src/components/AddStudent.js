@@ -26,7 +26,7 @@ function AddStudent() {
   };
 
   const saveFormData = async () => {
-    // const response = await fetch('/api/registration', {
+    // const response = await fetch('', {
     //   method: 'POST',
     //   body: JSON.stringify(values)
     // });

@@ -69,7 +69,7 @@ function StudentForm({
             <option value=""> Selecteaza facultate</option>
             {universities.map((univ, index) => (
               <option value={univ.id} key={index}>
-                {univ.nume}
+                {univ.value}
               </option>
             ))}
           </select>
@@ -88,8 +88,8 @@ function StudentForm({
           >
             <option value=""> Selecteaza An de studiu</option>
             {years.map((year, index) => (
-              <option value={year} key={index}>
-                {year}
+              <option value={year.id} key={index}>
+                {year.value}
               </option>
             ))}
           </select>
