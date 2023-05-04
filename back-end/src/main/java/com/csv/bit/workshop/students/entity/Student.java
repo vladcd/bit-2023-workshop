@@ -1,9 +1,6 @@
 package com.csv.bit.workshop.students.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.util.Objects;
 
@@ -12,6 +9,7 @@ import java.util.Objects;
 public class Student {
 
     @Id
+    @GeneratedValue
     private Long id;
 
     @Column
@@ -31,6 +29,9 @@ public class Student {
 
     @Column
     private Boolean inscrisCamin;
+
+    @Column
+    private Boolean deleted;
 
     public Long getId() {
         return id;
@@ -86,6 +87,14 @@ public class Student {
 
     public void setInscrisCamin(Boolean inscrisCamin) {
         this.inscrisCamin = inscrisCamin;
+    }
+
+    public Boolean getDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(Boolean deleted) {
+        this.deleted = deleted;
     }
 
     @Override
