@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { keysMapping, universities, years } from "../data/studentModel";
 import Actions from "./Actions";
-import { useAsync } from "react-async"
 
 async function getStudents() {
   const response = await fetch('http://localhost:8080/student', {
@@ -15,12 +14,12 @@ async function getStudents() {
 function mapValues(array, key) {
   let result = null;
   const filtered = array.filter((pair) => pair.id === key);
-  
+
   if (filtered.length > 0) {
     result = filtered[0].value;
   }
 
-  return result
+  return result;
 }
 
 function StudentTable() {
@@ -39,12 +38,12 @@ function StudentTable() {
   });
 
   function onStudentRemove(student) {
-    const updatedData = students.map((obj => {
-      if(obj.id === student.id) {
+    const updatedData = students.map((obj) => {
+      if (obj.id === student.id) {
         obj.deleted = true;
       }
       return obj;
-    }));
+    });
     setStudents(updatedData);
   }
 
@@ -76,9 +75,7 @@ function StudentTable() {
             {students.map((student, index) => (
               <tr
                 key={index}
-                className={`${
-                  student.deleted === true ? "table-danger" : ""
-                }`}
+                className={`${student.deleted === true ? "table-danger" : ""}`}
               >
                 <th scope="row">{student.id}</th>
                 <td>{student.nume}</td>
@@ -98,7 +95,10 @@ function StudentTable() {
                   </div>
                 </td>
                 <td>
-                  <Actions student={student} onRemove={() => onStudentRemove(student)} />
+                  <Actions
+                    student={student}
+                    onRemove={() => onStudentRemove(student)}
+                  />
                 </td>
               </tr>
             ))}

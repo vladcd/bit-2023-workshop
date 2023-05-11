@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
 function Actions({ student, onRemove }) {
   const [isDisabled, setIsDisabled] = useState(student.deleted === true);
@@ -34,10 +35,12 @@ function Actions({ student, onRemove }) {
 
   return (
     <div className="actionColumn">
-      {/* <button type="button" className="btn btn-success">
-        <i className="bi bi-person-gear"></i>
-        Edit
-      </button> */}
+      <Link to={isDisabled ? '' : `/editStudent?id=${student.id}`}>
+        <button type="button" className="btn btn-success" disabled={isDisabled}>
+          <i className="bi bi-gear-fill"></i>
+          Edit
+        </button>
+      </Link>
       <button
         type="button"
         className="btn btn-danger"
@@ -52,7 +55,7 @@ function Actions({ student, onRemove }) {
 }
 
 Actions.propTypes = {
-  student: PropTypes.object,
+  student: PropTypes.object.isRequired,
   onRemove: PropTypes.func,
 };
 

@@ -1,11 +1,43 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import { students } from "../data/studentModel";
 
 import StudentForm from "./StudentForm";
 
+function getStudent(id) {
+  let student = students.filter((stud) => stud.id === id)[0];
+  if (student) {
+    return {
+      id: student.id,
+      nume: student.nume,
+      prenume: student.prenume,
+      nr_matricol: student.nr_matricol,
+      facultate: student.facultate,
+      an_studiu: student.an_studiu,
+      inscris_camin: student.inscris_camin,
+      deteled: student.deleted
+    };
+  }
+  return null;
+}
+
 function AddStudent() {
   const navigate = useNavigate();
+  const { search } = useLocation();
+  let isEdit = false;
+
+  const id = new URLSearchParams(search).get("id");
+  let student = null;
+
+  if (id) {
+    isEdit = true;
+    student = getStudent(parseInt(id, 10));
+
+    if (student.deteled ) {
+      alert("Studentul este `soft-deleted`! Nu puteti edita");
+      navigate("/");
+    }
+  }
 
   const initialValues = {
     id: Math.max(...students.map((stud) => stud.id)) + 1,
@@ -17,13 +49,23 @@ function AddStudent() {
     inscris_camin: false,
   };
 
-  const [values, setValues] = useState(initialValues);
+  const [values, setValues] = useState(student || initialValues);
 
   const set = (name) => {
     return ({ target: { value } }) => {
       setValues((oldValues) => ({ ...oldValues, [name]: value }));
     };
   };
+
+  function addOrReplace(arr, newObj) {
+    const index = arr.findIndex((e) => e.id === newObj.id);
+
+    if (index === -1) {
+      arr.push(newObj);
+    } else {
+      arr[index] = newObj;
+    }
+  }
 
   const saveFormData = async () => {
     // const response = await fetch('', {
@@ -33,7 +75,8 @@ function AddStudent() {
     const response = {
       status: 200,
     };
-    students.push(values);
+
+    addOrReplace(students, values);
 
     if (response.status !== 200) {
       throw new Error(
@@ -66,7 +109,7 @@ function AddStudent() {
       values={values}
       set={set}
       handleCancel={handleCancel}
-      action="ADD"
+      action={isEdit ? "EDIT" : "ADD"}
     />
   );
 }
