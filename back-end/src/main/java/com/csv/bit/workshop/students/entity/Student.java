@@ -22,9 +22,11 @@ public class Student {
     private String nrMatricol;
 
     @Column
+    @Enumerated(EnumType.STRING)
     private Faculty facultate;
 
     @Column
+    @Enumerated(EnumType.STRING)
     private YearOfStudy anStudiu;
 
     @Column

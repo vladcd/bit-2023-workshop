@@ -44,4 +44,18 @@ public class StudentService {
         studentRepository.save(existingStudent);
     }
 
+    public List<Student> getStudentsByName(String name) {
+        return studentRepository.findByNume(name);
+    }
+
+    public Student updateStudent(Student updatedStudent, Long id) {
+        Student existingStudent = getStudentById(id);
+        existingStudent.setNume(updatedStudent.getNume());
+        existingStudent.setPrenume(updatedStudent.getPrenume());
+        existingStudent.setFacultate(updatedStudent.getFacultate());
+        existingStudent.setAnStudiu(updatedStudent.getAnStudiu());
+        existingStudent.setNrMatricol(updatedStudent.getNrMatricol());
+        existingStudent.setInscrisCamin(updatedStudent.getInscrisCamin());
+        return studentRepository.save(existingStudent);
+    }
 }

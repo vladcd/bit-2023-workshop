@@ -1,10 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { keysMapping, students, universities, years } from "../data/studentModel";
+import { keysMapping, universities, years } from "../data/studentModel";
 import Actions from "./Actions";
+import { useAsync } from "react-async"
 
-function getStudents() {
-  return students;
+async function getStudents() {
+  const response = await fetch('http://localhost:8080/student', {
+    method: "GET",
+  });
+  const responseJson = await response.json();
+  return responseJson;
 }
 
 function mapValues(array, key) {
@@ -19,8 +24,19 @@ function mapValues(array, key) {
 }
 
 function StudentTable() {
-  const data = getStudents();
-  const [students, setStudents] = useState(data);
+  const [students, setStudents] = useState([]);
+
+  useEffect(() => {
+    const loadStudents = async () => {
+                // Await make wait until that
+                // promise settles and return its result
+                const response = await getStudents();
+
+                // After fetching data stored it in posts state.
+                setStudents(response);
+            };
+    loadStudents();
+  });
 
   function onStudentRemove(student) {
     const updatedData = students.map((obj => {

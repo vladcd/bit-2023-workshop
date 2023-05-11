@@ -10,6 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/student")
+@CrossOrigin
 public class StudentsController {
 
     private final StudentService studentService;
@@ -40,4 +41,13 @@ public class StudentsController {
         return ResponseEntity.ok().build();
     }
 
+    @GetMapping("/search/name/{name}")
+    public List<Student> findStudentsByName(@PathVariable String name) {
+        return studentService.getStudentsByName(name);
+    }
+
+    @PutMapping("/{studentId}")
+    public Student updateStudent(@RequestBody Student student, @PathVariable Long studentId) {
+        return studentService.updateStudent(student, studentId);
+    }
 }
