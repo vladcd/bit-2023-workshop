@@ -1,13 +1,27 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { keysMapping, universities, years } from "../data/studentModel";
+import {
+  keysMapping,
+  students,
+  universities,
+  years,
+} from "../data/studentModel";
 import Actions from "./Actions";
 
 async function getStudents() {
-  const response = await fetch('http://localhost:8080/student', {
-    method: "GET",
-  });
-  const responseJson = await response.json();
+  let responseJson;
+  try {
+    const response = await fetch("http://localhost:8080/student", {
+      method: "GET",
+    });
+
+    if (response) {
+      responseJson = await response.json();
+    }
+  } catch (e) {
+    responseJson = students;
+  }
+
   return responseJson;
 }
 
@@ -27,13 +41,9 @@ function StudentTable() {
 
   useEffect(() => {
     const loadStudents = async () => {
-                // Await make wait until that
-                // promise settles and return its result
-                const response = await getStudents();
-
-                // After fetching data stored it in posts state.
-                setStudents(response);
-            };
+      const response = await getStudents();
+      setStudents(response);
+    };
     loadStudents();
   });
 
@@ -80,16 +90,16 @@ function StudentTable() {
                 <th scope="row">{student.id}</th>
                 <td>{student.nume}</td>
                 <td>{student.prenume}</td>
-                <td>{student.nr_matricol}</td>
+                <td>{student.nrMatricol}</td>
                 <td>{mapValues(universities, student.facultate)}</td>
-                <td>{mapValues(years, student.an_studiu)}</td>
+                <td>{mapValues(years, student.anStudiu)}</td>
                 <td>
                   <div>
                     <input
                       type="checkbox"
-                      id="inscris_camin"
-                      name="inscris_camin"
-                      checked={student.inscris_camin}
+                      id="inscrisCamin"
+                      name="inscrisCamin"
+                      checked={student.inscrisCamin}
                       readOnly
                     ></input>
                   </div>

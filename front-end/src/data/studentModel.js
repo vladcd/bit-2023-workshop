@@ -2,10 +2,10 @@ export const keysMapping = {
   id: "Id",
   nume: "Nume",
   prenume: "Prenume",
-  nr_matricol: "Numar matricol",
+  nrMatricol: "Numar matricol",
   facultate: "Facultate",
-  an_studiu: "An de studiu",
-  inscris_camin: "Inscris in camin",
+  anStudiu: "An de studiu",
+  inscrisCamin: "Inscris in camin",
 };
 
 export const students = [
@@ -13,22 +13,22 @@ export const students = [
     id: 10,
     nume: "Popescu",
     prenume: "Mihai",
-    nr_matricol: "ABC_1234",
+    nrMatricol: "ABC_1234",
     facultate: "FACULTATEA_DESIGN_DE_PRODUS_SI_MEDIU",
-    an_studiu: "FIRST",
-    inscris_camin: false,
+    anStudiu: "FIRST",
+    inscrisCamin: false,
     deleted: false,
   },
   {
     id: 11,
     nume: "Marinescu",
     prenume: "Rares",
-    nr_matricol: "ABC_1222",
+    nrMatricol: "ABC_1222",
     facultate: "FACULTATEA_DE_INGINERIE_MECANICA",
-    an_studiu: "FIRST",
-    inscris_camin: true,
+    anStudiu: "FIRST",
+    inscrisCamin: true,
     deleted: true,
-  },
+  }
 ];
 
 export const universities = [

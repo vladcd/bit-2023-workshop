@@ -41,17 +41,17 @@ function StudentForm({
           />
         </div>
         <div className="col-md-4">
-          <label htmlFor="nr_matricol" className="form-label">
+          <label htmlFor="nrMatricol" className="form-label">
             Numar matricol*:
           </label>
           <input
             className="form-control"
             type="text"
-            id="nr_matricol"
-            name="nr_matricol"
+            id="nrMatricol"
+            name="nrMatricol"
             required
-            onChange={set("nr_matricol")}
-            value={values["nr_matricol"]}
+            onChange={set("nrMatricol")}
+            value={values["nrMatricol"]}
           />
         </div>
         <div className="col-md-4">
@@ -75,16 +75,16 @@ function StudentForm({
           </select>
         </div>
         <div className="col-md-4">
-          <label htmlFor="an_studiu" className="form-label">
+          <label htmlFor="anStudiu" className="form-label">
             Anul de studiu*:
           </label>
           <select
             className="form-control"
-            id="an_studiu"
-            name="an_studiu"
+            id="anStudiu"
+            name="anStudiu"
             required
-            onChange={set("an_studiu")}
-            value={values["an_studiu"]}
+            onChange={set("anStudiu")}
+            value={values["anStudiu"]}
           >
             <option value=""> Selecteaza An de studiu</option>
             {years.map((year, index) => (
@@ -99,12 +99,12 @@ function StudentForm({
             <input
               className="form-check-input"
               type="checkbox"
-              id="inscris_camin"
-              name="inscris_camin"
-              onChange={set("inscris_camin")}
-              checked={values["inscris_camin"]}
+              id="inscrisCamin"
+              name="inscrisCamin"
+              onChange={set("inscrisCamin")}
+              checked={values["inscrisCamin"]}
             />
-            <label className="form-check-label" htmlFor="inscris_camin">
+            <label className="form-check-label" htmlFor="inscrisCamin">
               Inscris in camin
             </label>
           </div>

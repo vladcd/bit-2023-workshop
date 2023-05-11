@@ -6,18 +6,20 @@ import StudentForm from "./StudentForm";
 
 function getStudent(id) {
   let student = students.filter((stud) => stud.id === id)[0];
+  
   if (student) {
     return {
       id: student.id,
       nume: student.nume,
       prenume: student.prenume,
-      nr_matricol: student.nr_matricol,
+      nrMatricol: student.nrMatricol,
       facultate: student.facultate,
-      an_studiu: student.an_studiu,
-      inscris_camin: student.inscris_camin,
+      anStudiu: student.anStudiu,
+      inscrisCamin: student.inscrisCamin,
       deteled: student.deleted
     };
   }
+
   return null;
 }
 
@@ -43,10 +45,10 @@ function AddStudent() {
     id: Math.max(...students.map((stud) => stud.id)) + 1,
     nume: "",
     prenume: "",
-    nr_matricol: "",
+    nrMatricol: "",
     facultate: "",
-    an_studiu: "",
-    inscris_camin: false,
+    anStudiu: "",
+    inscrisCamin: false,
   };
 
   const [values, setValues] = useState(student || initialValues);
